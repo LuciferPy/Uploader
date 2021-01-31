@@ -3,4 +3,5 @@ apt install figlet
 mkdir files
 clear
 echo -e "\033[1;31m[+]Installion Complete\033[0m"
+rm -rf setup
 	           
