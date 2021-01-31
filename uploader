@@ -1,0 +1,70 @@
+#!/data/data/com.termux/files/usr/bin/bash
+red='\033[1;31m'
+yellow='\033[1;33m'
+blue='\033[1;34m'
+reset='\033[0m'
+clear
+printf $red
+figlet Uploader
+printf $reset
+printf $blue
+echo Welcome to Uploader..
+printf $reset
+printf $yellow
+echo "1. Ngrok			2. Localhost"
+echo "3. About Me			4. Exit"
+printf $reset
+printf $blue
+read -p $"Enter something: " num
+printf $reset
+if [ $num == 1 ];then
+cd files && php -S 127.0.0.1:5555 > /dev/null 2>&1 &
+sleep 2
+./ngrok http 127.0.0.1:5555 > /dev/null 2>&1 &
+ngrok_link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")
+printf $red
+echo '=========================='
+printf $yellow
+echo '	Link is ready'
+printf $red
+echo '=========================='
+printf $blue
+echo [+] Ngrok Link : $ngrok_link
+printf $reset
+exit 1
+elif [ $num == 2 ];then
+cd files && php -S 127.0.0.1:5555 > /dev/null 2>&1 &
+printf $red
+echo =====================
+printf $yellow
+echo Link is Ready
+printf $red
+echo =====================
+printf $reset
+printf $blue
+echo [+] https://localhost:5555
+printf $reset
+exit 2
+elif [ $num == 3 ];then
+clear
+printf $red
+echo '		README	'
+printf $yellow
+echo 'This program will be upload file from "files"'
+echo 'May be help for you'
+echo 'Thanks you by CyberHunter'
+printf $reset
+exit 3
+elif [ $num == 4 ];then
+printf $red
+echo 'Thanks for using my tool'
+echo 'Try more....'
+echo 'https://github.com/LuciferPy	:)'
+printf $reset
+exit 4
+else
+printf $red
+echo '[-] Wrong Input'
+printf $reset
+exit 5
+fi
